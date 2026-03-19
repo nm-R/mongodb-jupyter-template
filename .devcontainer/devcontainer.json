@@ -1,0 +1,32 @@
+{
+  "name": "Codespaces + Jupyter + Docker",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": false,
+      "configureZshAsDefaultShell": false,
+      "username": "vscode"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "ms-azuretools.vscode-docker"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.terminal.activateEnvironment": true,
+        "jupyter.askForKernelRestart": false
+      }
+    }
+  },
+
+  "forwardPorts": [8888],
+
+  "postCreateCommand": "pip install --no-cache-dir jupyter ipykernel notebook pandas matplotlib && python -m ipykernel install --user --name codespaces-python --display-name 'Python (codespace)'"
+}
